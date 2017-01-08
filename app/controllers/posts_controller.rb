@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
+  def index
+    @posts = current_user.posts
+  end
+
 
   before_filter :authenticate_user!, :only => [:new, :create]
 
@@ -21,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])  
+    @post = Post.find(params[:id])
   end
 
   private
